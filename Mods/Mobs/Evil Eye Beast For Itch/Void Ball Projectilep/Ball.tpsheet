@@ -1,0 +1,21 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:6651f0bfd6effcd4940072250ae885af:2411587596fa98b08ba58394d9224ae3:aa3a5635873c1d0e63eb690391654050$
+#
+:format=40300
+:texture=Ball.png
+:size=180x116
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Projectile Destroyed1;0;59;60;57; 0.5;0.5; 0;0;0;0
+Projectile Destroyed2;60;59;60;57; 0.5;0.5; 0;0;0;0
+Projectile Destroyed3;120;59;60;57; 0.5;0.5; 0;0;0;0
+Void Ball Projectile1;0;2;60;57; 0.5;0.5; 0;0;0;0
+Void Ball Projectile2;60;2;60;57; 0.5;0.5; 0;0;0;0
+Void Ball Projectile3;120;2;60;57; 0.5;0.5; 0;0;0;0

@@ -1,0 +1,28 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:f41e703972859f2d51da5d03b2ab19ab:bc8cee46d0f4ac01167a9726701c0cf0:e89626b9f3c67f6013ba77b29dd1ccda$
+#
+:format=40300
+:texture=move.png
+:size=780x60
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Eye Beast Moving1;0;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving2;60;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving3;120;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving4;180;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving5;240;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving6;300;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving7;360;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving8;420;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving9;480;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving10;540;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving11;600;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving12;660;3;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Moving13;720;3;60;57; 0.5;0.5; 0;0;0;0

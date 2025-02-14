@@ -1,0 +1,28 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:68ac489402f0bdabd4503b69dc685928:e592acf164ce36c25a08b35cf2b2507b:5830947cb57fe6d7de1349ef1cf2ceb3$
+#
+:format=40300
+:texture=Attack.png
+:size=360x116
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Eye Beast Attack1;0;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack2;60;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack3;120;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack4;0;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack5;180;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack6;240;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack7;300;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack8;0;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack9;60;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack10;120;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack11;180;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack12;240;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Attack13;300;2;60;57; 0.5;0.5; 0;0;0;0

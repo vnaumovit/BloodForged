@@ -1,0 +1,35 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:dd010f872b131da27887e3aff3db1270:9c85ee22f796fbda50c77d299f601603:b699c48b590b4685ff8c55f69c0652c5$
+#
+:format=40300
+:texture=idle.png
+:size=600x116
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=KeepTransparentPixels
+
+Eye Beast Idle1;0;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle2;60;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle3;120;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle4;180;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle5;240;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle6;300;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle7;360;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle8;420;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle9;480;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle10;540;59;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle11;0;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle12;60;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle13;120;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle14;180;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle15;240;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle16;300;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle17;360;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle18;420;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle19;480;2;60;57; 0.5;0.5; 0;0;0;0
+Eye Beast Idle20;540;2;60;57; 0.5;0.5; 0;0;0;0
