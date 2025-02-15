@@ -48,7 +48,7 @@ public abstract class EnemyAI : MonoBehaviour {
         currentState = defaultState;
     }
 
-    private void Start() {
+    protected virtual void Start() {
         entity = GetComponent<CommonEntity>();
         entity.onTakeHint += OnTakeHint;
     }
@@ -168,7 +168,7 @@ public abstract class EnemyAI : MonoBehaviour {
             return;
 
         switch (currentState) {
-            case State.Walking:
+            case State.Walking or State.Patroling:
                 ChangeFacingDirection(currentPosition, transform.position);
                 break;
             case State.Attacking or State.Chasing:
@@ -185,7 +185,7 @@ public abstract class EnemyAI : MonoBehaviour {
             walkingDto.walkingDistanceMax);
     }
 
-    private void ChangeFacingDirection(Vector3 startedPosition, Vector3 targetPosition) {
+    protected virtual void ChangeFacingDirection(Vector3 startedPosition, Vector3 targetPosition) {
         transform.rotation = Quaternion.Euler(0, startedPosition.x > targetPosition.x ? 180 : 0, 0);
     }
 

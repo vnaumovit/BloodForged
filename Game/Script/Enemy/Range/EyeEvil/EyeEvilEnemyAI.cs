@@ -1,12 +1,23 @@
 using UnityEngine;
 
 public class EyeEvilEnemyAI : EnemyAI {
+    private bool isFinishedSecondDestination;
+    private Vector3 firstDestination;
+    private Vector3 secondDestination;
+
+    protected new void Start() {
+        base.Start();
+        firstDestination = transform.position;
+        secondDestination = transform.position + new Vector3(2f, 4f, 0f);
+    }
 
     protected override void StateHandler() {
         switch (currentState) {
             default:
             case State.Death:
+                break;
             case State.Idle:
+                CheckState();
                 break;
             case State.Chasing:
                 CheckState();
@@ -18,7 +29,7 @@ public class EyeEvilEnemyAI : EnemyAI {
                 break;
             case State.Patroling:
                 CheckState();
-                Walking();
+                Patrolling();
                 break;
         }
     }
@@ -33,22 +44,39 @@ public class EyeEvilEnemyAI : EnemyAI {
         switch (distance) {
             case <= 4f:
                 currentState = State.Attacking;
-                agent.ResetPath();
-                walkingDto.walkingTime = 0f;
+                // agent.ResetPath();
+                // walkingDto.walkingTime = 0f;
                 break;
-            case var value when chasingDto.chasingDistance <= value :
+            case var value when value <= chasingDto.chasingDistance:
                 currentState = State.Chasing;
-                walkingDto.walkingTime = 0f;
                 attackNextTime = 0f;
                 break;
             default:
+                PatrollingAfterState();
                 currentState = State.Patroling;
                 attackNextTime = 0f;
                 break;
         }
     }
 
-    protected void Patrolling() {
-
+    private void PatrollingAfterState() {
+        if (currentState == State.Patroling) return;
+        agent.SetDestination(secondDestination);
+        isFinishedSecondDestination = false;
     }
+
+    private void Patrolling() {
+        isFinishedSecondDestination = Vector3.Distance(transform.position, secondDestination) <= 0.1f;
+        if (isFinishedSecondDestination) {
+            agent.SetDestination(firstDestination);
+        }
+        else if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
+            agent.SetDestination(secondDestination);
+        }
+    }
+
+    protected override void ChangeFacingDirection(Vector3 startedPosition, Vector3 targetPosition) {
+        transform.rotation = Quaternion.Euler(0, startedPosition.x < targetPosition.x ? 180 : 0, 0);
+    }
+
 }
