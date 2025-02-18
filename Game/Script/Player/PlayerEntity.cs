@@ -11,7 +11,7 @@ public class PlayerEntity : MonoBehaviour {
     public int health { get; private set; }
 
     private bool canTakeDamage = true;
-    public bool canAttack {get; private set;}
+    public bool canAttack { get; private set; }
     private const float RECOVERY_TIME = 1f;
 
     public EventHandler<HintEventArgs> onTakeHint;
@@ -25,11 +25,15 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     public void TakeDamage(Transform enemyTransform, int damage) {
-        if (!canTakeDamage) return;
+        if (!canTakeDamage || health <= 0) return;
         canTakeDamage = false;
         health -= damage;
         onTakeHint.Invoke(this, HintEventArgs.Of(enemyTransform));
         StartCoroutine(DamageRecoveryRoutine());
+    }
+
+    public void TakeHealth(int addedHealth) {
+        health += addedHealth;
     }
 
     private IEnumerator DamageRecoveryRoutine() {

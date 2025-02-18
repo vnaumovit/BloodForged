@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 2149485961525874937}
   - component: {fileID: 7104127388456793637}
   - component: {fileID: 5614518182509125718}
-  - component: {fileID: 7520851867542539229}
+  - component: {fileID: 2682094332919737944}
   - component: {fileID: 4535555178049241087}
   - component: {fileID: 8180984115794172858}
+  - component: {fileID: 8033237006502507081}
+  - component: {fileID: 4191137288778697459}
   m_Layer: 0
   m_Name: Boar
   m_TagString: Untagged
@@ -208,14 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df06cbe004b14dc58d0f19a2ca4b8440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingState: 1
-  walkingDistanceMax: 6
-  walkingDistanceMin: 2
-  walkingTimeMax: 10
-  chasingBoostTimeMax: 2
-  defaultSpeed: 1
-  chasingMultiplySpeed: 2
---- !u!114 &7520851867542539229
+  defaultState: 1
+--- !u!114 &2682094332919737944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,9 +220,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043489830374695224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dcf45f53f1a4acfb8cb49599665ed8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 53e8b50af3ee485fae91cbea97a174df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
 --- !u!114 &4535555178049241087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +250,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecd7b43a23c45c2a99335fb1a79769b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 20
+  minDamage: 3
+  maxDamage: 5
+--- !u!114 &8033237006502507081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043489830374695224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105bcca3802a46efad1ac00b7f3b4cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chasingDistance: 4
+  chasingBoostTimeMax: 2
+  boostSpeed: 2
+--- !u!114 &4191137288778697459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043489830374695224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea780dd23784041a9fd3ce1f0b2180e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingDistanceMax: 4
+  walkingDistanceMin: 2
+  walkingTimeMax: 5
 --- !u!1 &7859689578213772415
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,5 +494,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0525de90cbea4833a99afb2bc522f5b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 7520851867542539229}
+  entity: {fileID: 2682094332919737944}
   enemyAI: {fileID: 5614518182509125718}

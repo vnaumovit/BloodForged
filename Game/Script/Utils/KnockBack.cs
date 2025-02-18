@@ -23,8 +23,9 @@ public class KnockBack : MonoBehaviour {
 
     public void GetKnockedBack(Transform damageSource) {
         knockbackTime = knockbackMovingTimeMax;
-        var difference = (transform.position - damageSource.position).normalized * knockbackForce / rb.mass;
-        rb.AddForce(difference, ForceMode2D.Impulse);
+        var difference = (transform.position - damageSource.position).normalized;
+        var knockbackVector = difference * (knockbackForce / rb.mass);
+        rb.AddForce(knockbackVector, ForceMode2D.Impulse);
         isKnocking = true;
     }
 
