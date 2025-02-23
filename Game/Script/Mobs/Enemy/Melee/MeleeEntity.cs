@@ -12,7 +12,7 @@ public class MeleeEntity : CommonEntity {
     }
 
     public void OnTriggerEnter2D(Collider2D collision) {
-        if (edgeCollider2D.enabled && collision.transform.TryGetComponent(out PlayerEntity player)) {
+        if (edgeCollider2D.enabled && collision.transform.TryGetComponent(out PlayerStats player)) {
             player.TakeDamage(transform, Random.Range(dto.minDamage, dto.maxDamage));
         }
     }

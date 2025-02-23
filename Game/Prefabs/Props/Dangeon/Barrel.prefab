@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2284024397266084506}
   - component: {fileID: 3795578666579258862}
   - component: {fileID: 6359786669139949628}
-  - component: {fileID: -82445229408695078}
   - component: {fileID: 7970552468343430613}
+  - component: {fileID: 7198429057349611349}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2058639258, guid: 5993013c4da7ae34eb949e7235223f8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 150
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -117,8 +117,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &-82445229408695078
-PolygonCollider2D:
+--- !u!114 &7970552468343430613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367980935204676166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6533fa4846540fb9f286ae78d13dad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToCreate: 0.5
+--- !u!61 &7198429057349611349
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,41 +164,15 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.008571327, y: 0.09843333}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.35}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.10148239, y: 0.25471973}
-      - {x: -0.17944813, y: 0.17742157}
-      - {x: -0.19120693, y: -0.103829384}
-      - {x: -0.13038635, y: -0.15491772}
-      - {x: -0.12697077, y: -0.19355202}
-      - {x: 0.04980278, y: -0.20338058}
-      - {x: 0.15441942, y: -0.19086075}
-      - {x: 0.20128584, y: -0.13273335}
-      - {x: 0.22480297, y: -0.10585594}
-      - {x: 0.20381546, y: 0.17466259}
-      - {x: 0.1542511, y: 0.2221098}
-      - {x: 0.031597137, y: 0.27823734}
-  m_UseDelaunayMesh: 0
---- !u!114 &7970552468343430613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5367980935204676166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6533fa4846540fb9f286ae78d13dad5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chanceToCreate: 0.5
+  m_Size: {x: 0.27745426, y: 0.17497545}
+  m_EdgeRadius: 0

@@ -50,12 +50,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6801596127200109514, guid: eec0cf398435ec441987a440a656caa7, type: 3}
       propertyPath: m_Name
-      value: DoorUpDown3 Variant
+      value: DoorV2
       objectReference: {fileID: 0}
     - target: {fileID: 8806286617605280325, guid: eec0cf398435ec441987a440a656caa7, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1815010247, guid: 6dbace7750cabe948976d62903952297, type: 3}
+    - target: {fileID: 8806286617605280325, guid: eec0cf398435ec441987a440a656caa7, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

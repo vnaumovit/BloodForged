@@ -21,14 +21,14 @@ public class PlayerVisual : MonoBehaviour {
     }
 
     private void Start() {
-        PlayerEntity.instance.onTakeHint += OnTakeHint;
+        PlayerStats.instance.onTakeHint += OnTakeHint;
         PlayerController.instance.onAttack += OnAttackTrigger;
         PlayerController.instance.onDeath += OnDie;
         playerSound = PlayerSound.instance;
     }
 
     private void OnDestroy() {
-        PlayerEntity.instance.onTakeHint -= OnTakeHint;
+        PlayerStats.instance.onTakeHint -= OnTakeHint;
         PlayerController.instance.onAttack -= OnAttackTrigger;
         PlayerController.instance.onDeath -= OnDie;
     }
@@ -62,7 +62,7 @@ public class PlayerVisual : MonoBehaviour {
     private void HandleAnimationIdleAndRunning() {
         animator.SetBool(IS_MOVING, PlayerController.instance.isMoving);
         animator.SetFloat(SPEED_RATE, PlayerController.instance.speedRate);
-        // animator.SetInteger(LEVEL, PlayerEntity.Instance.level);
+        // animator.SetInteger(LEVEL, PlayerStats.Instance.level);
     }
 
     public void TriggerOnColliderSword() {

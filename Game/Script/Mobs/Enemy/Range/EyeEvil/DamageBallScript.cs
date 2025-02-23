@@ -11,7 +11,7 @@ public class DamageBallScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.transform.TryGetComponent(out PlayerEntity player)) {
+        if (collision.transform.TryGetComponent(out PlayerStats player)) {
             player.TakeDamage(transform, Random.Range(5, 20));
             Destroy(gameObject);
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1934201528926080054}
   - component: {fileID: -6876051011346823332}
   - component: {fileID: -7111501335406279363}
-  - component: {fileID: -6232346557124679720}
+  - component: {fileID: 1183971377635796818}
   m_Layer: 0
   m_Name: Chest1
   m_TagString: Untagged
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &-6876051011346823332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,8 +130,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &-6232346557124679720
-PolygonCollider2D:
+--- !u!61 &1183971377635796818
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -164,24 +164,15 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.06476418}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.32, y: 0.29}
     newSize: {x: 0.32, y: 0.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.034305215, y: 0.1270355}
-      - {x: -0.14005259, y: 0.1283771}
-      - {x: -0.15177357, y: 0.09890497}
-      - {x: -0.15372872, y: -0.0086016655}
-      - {x: -0.13989177, y: -0.13759167}
-      - {x: 0.13451162, y: -0.13724263}
-      - {x: 0.15301907, y: -0.031151295}
-      - {x: 0.14448527, y: 0.12616076}
-  m_UseDelaunayMesh: 0
+  m_Size: {x: 0.26416802, y: 0.115664795}
+  m_EdgeRadius: 0

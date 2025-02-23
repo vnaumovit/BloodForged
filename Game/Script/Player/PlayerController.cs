@@ -5,7 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class PlayerController : MonoBehaviour {
     public static PlayerController instance { get; private set; }
-    private static PlayerEntity playerEntity;
+    private static PlayerStats playerStats;
 
     public float speedRate { get; private set; }
     private float speed = 3f;
@@ -31,14 +31,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Start() {
-        playerEntity = PlayerEntity.instance;
+        playerStats = PlayerStats.instance;
         mainCamera = Camera.main;
-        playerEntity.onTakeHint += OnTakeHint;
+        playerStats.onTakeHint += OnTakeHint;
         GameInput.instance.onPlayerAttack += OnAttack;
     }
 
     private void OnDestroy() {
-        playerEntity.onTakeHint -= OnTakeHint;
+        playerStats.onTakeHint -= OnTakeHint;
         GameInput.instance.onPlayerAttack -= OnAttack;
     }
 
@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour {
         if (isDeath || knockBack.isKnocking)
             return;
         FollowTurns();
+        if (!isMoving) {
+            FollowToCursor();
+        }
         if (isAttacking)
             return;
         HandleMoving();
@@ -70,13 +73,24 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnAttack(object sender, EventArgs e) {
-        if (!isMoving && playerEntity.canAttack) {
+        if (!isMoving && playerStats.canAttack) {
             onAttack.Invoke(this, EventArgs.Empty);
         }
     }
 
     public Vector3? GetPlayerScreenPosition() {
         return mainCamera?.WorldToScreenPoint(transform.position);
+    }
+
+    private void FollowToCursor() {
+        var mousePosition = GameInput.instance.GetMousePosition();
+        var playerPosition = GetPlayerScreenPosition();
+        if (playerPosition != null && mousePosition.x < playerPosition.Value.x) {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     private void FollowTurns() {
@@ -86,15 +100,6 @@ public class PlayerController : MonoBehaviour {
         else if (Input.GetKey(KeyCode.D)) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
-        // var mousePosition = GameInput.instance.GetMousePosition();
-        // var playerPosition = GetPlayerScreenPosition();
-        // if (playerPosition != null && mousePosition.x < playerPosition.Value.x) {
-        //     transform.rotation = Quaternion.Euler(0, 180, 0);
-        // }
-        // else {
-        //     transform.rotation = Quaternion.Euler(0, 0, 0);
-        // }
     }
 
     private void OnTakeHint(object sender, HintEventArgs hintEventArgs) {
@@ -103,7 +108,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void DetectDeath() {
-        if (playerEntity.health > 0) return;
+        if (playerStats.health > 0) return;
         isDeath = true;
         onDeath?.Invoke(this, EventArgs.Empty);
         StartCoroutine(Death());

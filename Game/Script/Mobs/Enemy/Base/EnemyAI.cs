@@ -149,9 +149,14 @@ public abstract class EnemyAI : MonoBehaviour {
     protected virtual void Attacking() {
         if (Time.time < attackNextTime || !entity.canAttack)
             return;
-
+        StartCoroutine(RotateAttack());
         onEnemyAttack?.Invoke(this, EventArgs.Empty);
         attackNextTime = Time.time + ATTACK_RATE_TIME;
+    }
+
+    private IEnumerator RotateAttack() {
+        yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+        currentState = State.Chasing;
     }
 
     protected virtual void Chasing() {
@@ -160,7 +165,13 @@ public abstract class EnemyAI : MonoBehaviour {
             agent.speed = entity.speed * chasingDto.boostSpeed;
         }
 
-        agent.SetDestination(PlayerController.instance.transform.position);
+        agent.SetDestination(GetOffsetPosition(PlayerController.instance.transform.position));
+    }
+
+    private Vector3 GetOffsetPosition(Vector3 targetPosition) {
+        const float offset = 0.4f; // Расстояние разброса
+        var randomOffset = new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), 0);
+        return targetPosition + randomOffset;
     }
 
     private void FacingDirectionHandler() {

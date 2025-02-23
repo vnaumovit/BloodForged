@@ -8,9 +8,9 @@ public class HealingPotion : MonoBehaviour {
             commonEntity.TakeHealth(RECOVERY_HEALTH);
         }
         else if (
-            collision.transform.TryGetComponent(out PlayerEntity playerEntity)) {
-            if (playerEntity.maxHealth != playerEntity.health) {
-                playerEntity.TakeHealth(RECOVERY_HEALTH);
+            collision.transform.TryGetComponent(out PlayerStats playerStats)) {
+            if (playerStats.maxHealth != playerStats.health) {
+                playerStats.TakeHealth(RECOVERY_HEALTH);
             }
         }
 

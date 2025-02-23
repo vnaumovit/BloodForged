@@ -14,16 +14,16 @@ public class SwordColliderDown : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D collision) {
-        ActiveWeapon activeWeapon = ActiveWeapon.instance;
         var instanceTransform = PlayerController.instance.transform;
+        var damage = Random.Range(PlayerStats.instance.maxDamage / 2, PlayerStats.instance.maxDamage);
         if (collision.transform.TryGetComponent(out CommonEntity enemyEntity)) {
-            enemyEntity.TakeDamage(instanceTransform, Random.Range(activeWeapon.avgDamage, activeWeapon.maxDamage));
+            enemyEntity.TakeDamage(instanceTransform, damage);
             onPunch = true;
         }
         else if (
             collision.transform.TryGetComponent(out NpcEntity npcEntity)) {
             npcEntity.TakeDamage(instanceTransform,
-                Random.Range(activeWeapon.avgDamage, activeWeapon.maxDamage));
+                damage);
             onPunch = true;
         }
     }

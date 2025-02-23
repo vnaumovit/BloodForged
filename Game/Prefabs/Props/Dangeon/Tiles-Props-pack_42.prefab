@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5669110475532503308}
   - component: {fileID: 4990903143472433594}
   - component: {fileID: 2516809733205710577}
-  - component: {fileID: 5009226780514355941}
+  - component: {fileID: 1743001997485459168}
   m_Layer: 0
   m_Name: Tiles-Props-pack_42
   m_TagString: Untagged
@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chanceToCreate: 0.5
---- !u!60 &5009226780514355941
-PolygonCollider2D:
+--- !u!61 &1743001997485459168
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -164,27 +164,15 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0022634268, y: 0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 0.9375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.26097295, y: 0.27027702}
-      - {x: -0.30124062, y: 0.2618324}
-      - {x: -0.32549304, y: 0.11209683}
-      - {x: -0.1239042, y: -0.13396844}
-      - {x: -0.09012574, y: -0.44623107}
-      - {x: 0.13964733, y: -0.446231}
-      - {x: 0.15653646, y: -0.4121662}
-      - {x: 0.12814876, y: -0.118378386}
-      - {x: 0.22090527, y: -0.020132788}
-      - {x: 0.3125, y: 0.125}
-      - {x: 0.3125, y: 0.15625}
-  m_UseDelaunayMesh: 0
+  m_Size: {x: 0.16935241, y: 0.1}
+  m_EdgeRadius: 0

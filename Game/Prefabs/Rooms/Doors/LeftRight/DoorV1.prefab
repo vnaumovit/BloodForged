@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4385618129526013132}
   - component: {fileID: 8139903199746529474}
+  - component: {fileID: -1958940601228232006}
   m_Layer: 0
   m_Name: DoorV1
   m_TagString: Untagged
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -167,6 +168,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2289303, y: 0.94573355}
   m_EdgeRadius: 0
+--- !u!114 &-1958940601228232006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726905793136377236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6039f1c7c64f57b6f263df84f0895c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocked: 0
+  cam: {fileID: 0}
+  collider: {fileID: 8139903199746529474}
 --- !u!1 &7454021253760263754
 GameObject:
   m_ObjectHideFlags: 0
