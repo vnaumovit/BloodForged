@@ -40,29 +40,24 @@ public class LevelGenerator : MonoBehaviour {
                         doorPoints[i].isOccupied = true;
                         generatedRooms.Add(newRoom);
                         countRooms++;
-                        if (i == doorPoints.Count - 1) {
-                            doorPoints = newRoom.GetDoorPoints();
-                            roomPosition = newRoom.transform.position;
-                            roomSize = newRoom.GetRoomSize();
-                            break;
-                        }
+                    }
+                    else {
+                        doorPoints[i].isOccupied = true;
                     }
                 }
-
-                doorPoints = CheckExistsRoomForNotOccupiedDoors(i, doorPoints);
+                if (i == doorPoints.Count - 1) {
+                    var roomWithDoors =
+                        generatedRooms.FirstOrDefault(r => r.GetDoorPoints().Any(d => d.hasDoor && !d.isOccupied));
+                    if (roomWithDoors != null) {
+                        doorPoints = roomWithDoors.GetDoorPoints();
+                        roomPosition = roomWithDoors.transform.position;
+                        roomSize = roomWithDoors.GetRoomSize();
+                    }
+                }
             }
 
             dungeonSize--;
         }
-    }
-
-    private List<DoorPoint> CheckExistsRoomForNotOccupiedDoors(int i, List<DoorPoint> doorPoints) {
-        if (i == doorPoints.Count - 1) {
-            var roomWithDoors =
-                generatedRooms.FirstOrDefault(r => r.GetDoorPoints().Any(d => d.hasDoor && !d.isOccupied));
-            return roomWithDoors != null ? roomWithDoors.GetDoorPoints() : null;
-        }
-        return doorPoints;
     }
 
     private Room TryGenerateRoom(Vector2 roomPosition, Vector2 roomSize, DoorPoint doorPoint) {
@@ -94,8 +89,8 @@ public class LevelGenerator : MonoBehaviour {
 
             // Проверка на перекрытие
             if (IsPositionOccupied(newRoomPosition, newRoomSize)) {
-            Destroy(newRoom);
-            return null;
+                Destroy(newRoom);
+                return null;
             }
 
             newRoom.transform.position = newRoomPosition;

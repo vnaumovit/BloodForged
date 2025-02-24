@@ -16,18 +16,20 @@ public class CameraController : MonoBehaviour {
             camHalfHeight = cam.orthographicSize;
             camHalfWidth = camHalfHeight * cam.aspect;
         }
+
         transform.position = Vector3.zero;
         player = PlayerController.instance.transform;
+        currentRoom = GameObject.Find("Room1").GetComponent<Room>();
     }
 
     private void LateUpdate() {
         if (!player || !currentRoom) return;
 
         // Получаем границы текущей комнаты
-        var roomPosition  = currentRoom.transform.position;
-        var roomSize = currentRoom.GetRoomSize();
-        Vector2 minBounds = roomPosition - (Vector3) roomSize / 2;
-        Vector2 maxBounds = roomPosition + (Vector3) roomSize / 2;
+        var roomPosition = currentRoom.transform.position;
+        var tilemap = currentRoom.tilemapBounds.tilemapRenderer;
+        Vector2 minBounds = tilemap.bounds.min;
+        Vector2 maxBounds = tilemap.bounds.max;
 
         // Ограничиваем позицию камеры в пределах комнаты
         var clampedX = Mathf.Clamp(player.position.x, minBounds.x + camHalfWidth, maxBounds.x - camHalfWidth);

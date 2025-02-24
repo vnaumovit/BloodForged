@@ -8,7 +8,9 @@ public class PlayerHealthBar : MonoBehaviour {
 
     private void Start() {
         healthSlider = GetComponent<Slider>();
-        healthSlider.maxValue = PlayerStats.instance.maxHealth;
+        if (PlayerStats.instance) {
+            healthSlider.maxValue = PlayerStats.instance.maxHealth;
+        }
     }
 
     private void LateUpdate() {

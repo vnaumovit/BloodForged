@@ -6,9 +6,11 @@ public class TilemapBounds : MonoBehaviour {
     public Vector2 minBounds { get; private set; }
     public Vector2 maxBounds { get; private set; }
     public BoundsInt bounds { get; private set; }
+    public TilemapRenderer tilemapRenderer { get; private set; }
 
     private void Awake() {
         tilemap = GetComponent<Tilemap>();
+        tilemapRenderer = GetComponent<TilemapRenderer>();
         bounds = tilemap.cellBounds;
         minBounds = tilemap.CellToWorld(bounds.min);
         maxBounds = tilemap.CellToWorld(bounds.max);
