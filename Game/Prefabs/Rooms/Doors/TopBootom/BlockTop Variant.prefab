@@ -15,7 +15,15 @@ PrefabInstance:
     - target: {fileID: 3701415590732990240, guid: 8e85c413ca20d8d4999815a9f3746ff2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1545001853, guid: dde610893a2491742b8e8e3bb23e6793, type: 3}
+      objectReference: {fileID: -1453001710, guid: 60272bd4ecf4bbd459573a1c80cb0505, type: 3}
+    - target: {fileID: 3701415590732990240, guid: 8e85c413ca20d8d4999815a9f3746ff2, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020211895303324376, guid: 8e85c413ca20d8d4999815a9f3746ff2, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9194822735935416407, guid: 8e85c413ca20d8d4999815a9f3746ff2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

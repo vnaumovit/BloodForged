@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour {
     [SerializeField] private Camera cam;
-    private Transform player; // Игрок
-    private Room currentRoom; // Текущая комната игрока
+    private Transform player;
+    private TilemapRenderer tilemapRenderer;
+    private bool isRoom = true;
 
     private float camHalfWidth, camHalfHeight;
 
@@ -19,25 +21,33 @@ public class CameraController : MonoBehaviour {
 
         transform.position = Vector3.zero;
         player = PlayerController.instance.transform;
-        currentRoom = GameObject.Find("Room1").GetComponent<Room>();
+        tilemapRenderer = GameObject.Find("Room1").GetComponent<Room>().roomTilemap.wallRender;
     }
 
     private void LateUpdate() {
-        if (!player || !currentRoom) return;
+        if (!player || !tilemapRenderer) return;
 
         // Получаем границы текущей комнаты
-        var roomPosition = currentRoom.transform.position;
-        var tilemap = currentRoom.tilemapBounds.tilemapRenderer;
-        Vector2 minBounds = tilemap.bounds.min;
-        Vector2 maxBounds = tilemap.bounds.max;
+        Vector2 minBounds = tilemapRenderer.bounds.min;
+        Vector2 maxBounds = tilemapRenderer.bounds.max;
 
-        // Ограничиваем позицию камеры в пределах комнаты
-        var clampedX = Mathf.Clamp(player.position.x, minBounds.x + camHalfWidth, maxBounds.x - camHalfWidth);
-        var clampedY = Mathf.Clamp(player.position.y, minBounds.y + camHalfHeight, maxBounds.y - camHalfHeight);
+        float clampedX = player.position.x;
+        float clampedY = player.position.y;
+
+        if (isRoom) {
+            cam.orthographicSize = 2;
+            clampedX = Mathf.Clamp(player.position.x, minBounds.x + camHalfWidth, maxBounds.x - camHalfWidth);
+            clampedY = Mathf.Clamp(player.position.y, minBounds.y + camHalfHeight, maxBounds.y - camHalfHeight);
+        }
+        else {
+            cam.orthographicSize = 1.5f;
+        }
+
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
     }
 
-    public void SetCurrentRoom(Room room) {
-        currentRoom = room; // Устанавливаем текущую комнату
+    public void SetCurrentTilemapRender(TilemapRenderer tilemapRenderer, bool isRoom) {
+        this.isRoom = isRoom;
+        this.tilemapRenderer = tilemapRenderer;
     }
 }

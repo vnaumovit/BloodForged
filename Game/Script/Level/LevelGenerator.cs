@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour {
     [SerializeField] private List<GameObject> rooms;
-    [SerializeField] public GameObject[] corridors;
+    [SerializeField] public GameObject corridorPrefab;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject portal;
     private readonly Dictionary<Vector2, Vector2> occupiedPositions = new();
     private readonly List<Room> generatedRooms = new();
 
     public int dungeonSize = 5;
     private int countRooms = 2;
-    public float minRoomOffset = 3f;
-    public float maxRoomOffset = 10f;
+    public int minRoomOffset = 1;
+    public int maxRoomOffset = 5;
 
     private void Start() {
         GenerateDungeon();
@@ -22,7 +24,8 @@ public class LevelGenerator : MonoBehaviour {
     private void GenerateDungeon() {
         var roomPosition = Vector2.zero;
         var startRoom = GenerateRoom(roomPosition, "Room1");
-        Instantiate(player, roomPosition, Quaternion.identity);
+        Instantiate(player, new Vector3(4.5f, 1f, 0), Quaternion.identity);
+        Instantiate(portal, new Vector3(4.5f, 1.5f, 0), Quaternion.identity, startRoom.transform);
         var roomComponent = startRoom.GetComponent<Room>();
         var roomSize = roomComponent.GetRoomSize();
         occupiedPositions.Add(roomPosition, roomSize);
@@ -32,8 +35,7 @@ public class LevelGenerator : MonoBehaviour {
         while (dungeonSize > 0 && doorPoints != null) {
             for (int i = 0; i < doorPoints.Count; i++) {
                 if (doorPoints[i].hasDoor && !doorPoints[i].isOccupied) {
-                    Room newRoom = null;
-                    newRoom = TryGenerateRoom(roomPosition, roomSize, doorPoints[i]);
+                    var newRoom = TryGenerateRoom(roomPosition, roomSize, doorPoints[i]);
                     if (newRoom != null) {
                         newRoom.GenerateEnvironment();
                         occupiedPositions.Add(newRoom.transform.position, roomSize);
@@ -42,9 +44,11 @@ public class LevelGenerator : MonoBehaviour {
                         countRooms++;
                     }
                     else {
+                        doorPoints[i].GetComponentInChildren<Door>().isLocked = true;
                         doorPoints[i].isOccupied = true;
                     }
                 }
+
                 if (i == doorPoints.Count - 1) {
                     var roomWithDoors =
                         generatedRooms.FirstOrDefault(r => r.GetDoorPoints().Any(d => d.hasDoor && !d.isOccupied));
@@ -85,13 +89,16 @@ public class LevelGenerator : MonoBehaviour {
             }
 
             // Вычисляем новую позицию комнаты
-            var newRoomPosition = GetRoomPosition(roomPosition, roomSize, newRoomSize, oppositeDoor);
+            var randomDistance = Random.Range(minRoomOffset, maxRoomOffset);
+            var newRoomPosition = GetRoomPosition(roomPosition, roomSize, newRoomSize, oppositeDoor, randomDistance);
 
             // Проверка на перекрытие
             if (IsPositionOccupied(newRoomPosition, newRoomSize)) {
                 Destroy(newRoom);
                 return null;
             }
+            
+            GenerateCorridor(newRoomComponent, doorPoint, randomDistance, newRoomComponent.GetFloorTile());
 
             newRoom.transform.position = newRoomPosition;
             return newRoomComponent;
@@ -141,24 +148,45 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     private Vector2 GetRoomPosition(Vector2 currentPos, Vector2 currentRoomSize, Vector2 newRoomSize,
-        DoorPoint doorPoint) {
-        float spacing = 3f;
+        DoorPoint doorPoint, int randomDistance) {
         Vector2 offset = Vector2.zero;
         switch (doorPoint.type) {
             case DoorGenerator.Type.Top:
-                offset = new Vector2(0, -((currentRoomSize.y / 2) + (newRoomSize.y / 2) + spacing));
+                offset = new Vector2(0, -((currentRoomSize.y / 2) + (newRoomSize.y / 2) + randomDistance));
                 break;
             case DoorGenerator.Type.Bottom:
-                offset = new Vector2(0, (currentRoomSize.y / 2) + (newRoomSize.y / 2) + spacing);
+                offset = new Vector2(0, (currentRoomSize.y / 2) + (newRoomSize.y / 2) + randomDistance);
                 break;
             case DoorGenerator.Type.Left:
-                offset = new Vector2((currentRoomSize.x / 2) + (newRoomSize.x / 2) + spacing, 0);
+                offset = new Vector2((currentRoomSize.x / 2) + (newRoomSize.x / 2) + randomDistance, 0);
                 break;
             case DoorGenerator.Type.Right:
-                offset = new Vector2(-((currentRoomSize.x / 2) + (newRoomSize.x / 2) + spacing), 0);
+                offset = new Vector2(-((currentRoomSize.x / 2) + (newRoomSize.x / 2) + randomDistance), 0);
                 break;
         }
 
         return currentPos + offset;
+    }
+
+    private void GenerateCorridor(Room room, DoorPoint doorPoint, int offset, TileBase floorTile) {
+        var startPosition = Vector2Int.zero;
+        Vector2Int endPosition = default;
+        if (doorPoint.type == DoorGenerator.Type.Top) {
+            endPosition = new Vector2Int(startPosition.x, startPosition.y + offset);
+        }
+        else if (doorPoint.type == DoorGenerator.Type.Bottom) {
+            endPosition = new Vector2Int(startPosition.x, startPosition.y - offset);
+        }
+        else if (doorPoint.type == DoorGenerator.Type.Left) {
+            endPosition = new Vector2Int(startPosition.x - offset, startPosition.y);
+        }
+        else if (doorPoint.type == DoorGenerator.Type.Right) {
+            endPosition = new Vector2Int(startPosition.x + offset, startPosition.y);
+        }
+
+        var corridor = Instantiate(corridorPrefab, doorPoint.corridor.transform.position, Quaternion.identity);
+        var corridorGenerator = corridor.GetComponent<CorridorGenerator>();
+        corridorGenerator.floorTile = floorTile;
+        corridorGenerator.GenerateCorridor(startPosition, endPosition, 3);
     }
 }

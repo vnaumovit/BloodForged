@@ -236,12 +236,12 @@ MonoBehaviour:
   rooms:
   - {fileID: 8002589568327956909, guid: 1d86ff9694b4d8349a7b639efbadfda2, type: 3}
   - {fileID: 8002589568327956909, guid: acfbcf8d277866d43be301496f14dec0, type: 3}
-  corridors:
-  - {fileID: 9112947406671838832, guid: 3878c6eaad7dc234fb14b649f645876c, type: 3}
+  corridorPrefab: {fileID: 7339775293272666458, guid: 63c6aeb4833787b4e8ce371bad878ede, type: 3}
   player: {fileID: 8623341792451751087, guid: 4785d89a089102b4b8f61c83b42f316a, type: 3}
+  portal: {fileID: 3883834965839812937, guid: 6e5d58d35d2854b4faf0a5648cf746c0, type: 3}
   dungeonSize: 100
-  minRoomOffset: 3
-  maxRoomOffset: 10
+  minRoomOffset: 1
+  maxRoomOffset: 5
 --- !u!4 &420687192
 Transform:
   m_ObjectHideFlags: 0

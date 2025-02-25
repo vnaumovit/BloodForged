@@ -12,11 +12,11 @@ public class Door : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
             if (isLocked) {
-                collider.enabled = true;
+                collider.isTrigger = false;
             }
             else {
                 var room = transform.parent.parent.parent.GetComponent<Room>();
-                cam.SetCurrentRoom(room);
+                cam.SetCurrentTilemapRender(room.roomTilemap.wallRender, true);
             }
         }
     }
