@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour {
     public bool canAttack { get; private set; }
     private const float RECOVERY_TIME = 1f;
 
-    public EventHandler<HintEventArgs> onTakeHint;
+    public EventHandler<HurtEventArgs> onTakeHurt;
 
     private void Awake() {
         instance = this;
@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour {
         if (!canTakeDamage || health <= 0) return;
         canTakeDamage = false;
         health -= damage;
-        onTakeHint.Invoke(this, HintEventArgs.Of(enemyTransform));
+        onTakeHurt.Invoke(this, HurtEventArgs.Of(enemyTransform));
         StartCoroutine(DamageRecoveryRoutine());
     }
 

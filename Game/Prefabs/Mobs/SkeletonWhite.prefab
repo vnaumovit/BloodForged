@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 6060854418566347862}
   - component: {fileID: 3837299231226852742}
   - component: {fileID: 7989152128191502117}
+  - component: {fileID: 2642903495563909019}
   m_Layer: 0
   m_Name: SkeletonWhite
   m_TagString: Untagged
@@ -396,5 +397,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
-  minDamage: 3
-  maxDamage: 5
+  minDamage: 10
+  maxDamage: 20
+--- !u!114 &2642903495563909019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189102836738494872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6533fa4846540fb9f286ae78d13dad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToCreate: 0.2
+  number: 0

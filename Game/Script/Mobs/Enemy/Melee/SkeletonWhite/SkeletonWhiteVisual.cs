@@ -8,7 +8,7 @@ public class SkeletonWhiteVisual : MonoBehaviour {
     private static readonly int isAttacking = Animator.StringToHash("isAttacking");
     private static readonly int attackType = Animator.StringToHash("attackType");
     private static readonly int onDie = Animator.StringToHash("onDie");
-    private static readonly int takeHint = Animator.StringToHash("takeHint");
+    private static readonly int takeHurt = Animator.StringToHash("takeHurt");
     [SerializeField] private MeleeEntity entity;
     [SerializeField] private EnemyAI enemyAI;
     private Animator animator;
@@ -20,13 +20,13 @@ public class SkeletonWhiteVisual : MonoBehaviour {
     public void Start() {
         enemyAI.onEnemyAttack += OnAttack;
         enemyAI.onDie += OnDie;
-        entity.onTakeHint += TakeHint;
+        entity.onTakeHurt += TakeHurt;
     }
 
     public void OnDestroy() {
         enemyAI.onEnemyAttack -= OnAttack;
         enemyAI.onDie -= OnDie;
-        entity.onTakeHint -= TakeHint;
+        entity.onTakeHurt -= TakeHurt;
     }
 
     private void FixedUpdate() {
@@ -47,8 +47,8 @@ public class SkeletonWhiteVisual : MonoBehaviour {
         animator.SetBool(isAttacking, false);
     }
 
-    private void TakeHint(object sender, EventArgs e) {
-        animator.SetTrigger(takeHint);
+    private void TakeHurt(object sender, EventArgs e) {
+        animator.SetTrigger(takeHurt);
     }
 
     private void OnDie(object sender, EventArgs e) {

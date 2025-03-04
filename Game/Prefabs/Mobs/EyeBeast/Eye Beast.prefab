@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 6648483006481650998}
   - component: {fileID: 4339739786157633216}
   - component: {fileID: 180604542702149979}
+  - component: {fileID: 6525646556501190378}
   m_Layer: 0
   m_Name: Eye Beast
   m_TagString: Untagged
@@ -336,3 +337,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 1673499387592481789, guid: fd70752b80ea37349bb44a73f5b22079, type: 3}
   spawnPoint: {fileID: 1091197355383267067}
+--- !u!114 &6525646556501190378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180109546031374308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6533fa4846540fb9f286ae78d13dad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToCreate: 0.1
+  number: 0

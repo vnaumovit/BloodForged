@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     public static PlayerController instance { get; private set; }
     private static PlayerStats playerStats;
+    [SerializeField] private GameOverController gameOverController;
 
     public float speedRate { get; private set; }
     private float speed = 3f;
@@ -33,12 +34,12 @@ public class PlayerController : MonoBehaviour {
     private void Start() {
         playerStats = PlayerStats.instance;
         mainCamera = Camera.main;
-        playerStats.onTakeHint += OnTakeHint;
+        playerStats.onTakeHurt += OnTakeHurt;
         GameInput.instance.onPlayerAttack += OnAttack;
     }
 
     private void OnDestroy() {
-        playerStats.onTakeHint -= OnTakeHint;
+        playerStats.onTakeHurt -= OnTakeHurt;
         GameInput.instance.onPlayerAttack -= OnAttack;
     }
 
@@ -46,9 +47,12 @@ public class PlayerController : MonoBehaviour {
         if (isDeath || knockBack.isKnocking)
             return;
         FollowTurns();
+        ActiveWeapon.instance.FollowTurns();
         if (!isMoving) {
             FollowToCursor();
+            ActiveWeapon.instance.FollowToCursor();
         }
+
         if (isAttacking)
             return;
         HandleMoving();
@@ -82,7 +86,7 @@ public class PlayerController : MonoBehaviour {
         return mainCamera?.WorldToScreenPoint(transform.position);
     }
 
-    private void FollowToCursor() {
+    public void FollowToCursor() {
         var mousePosition = GameInput.instance.GetMousePosition();
         var playerPosition = GetPlayerScreenPosition();
         if (playerPosition != null && mousePosition.x < playerPosition.Value.x) {
@@ -93,7 +97,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void FollowTurns() {
+    public void FollowTurns() {
         if (Input.GetKey(KeyCode.A)) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
@@ -102,8 +106,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTakeHint(object sender, HintEventArgs hintEventArgs) {
-        knockBack.GetKnockedBack(hintEventArgs.transformSource);
+    private void OnTakeHurt(object sender, HurtEventArgs hurtEventArgs) {
+        knockBack.GetKnockedBack(hurtEventArgs.transformSource);
         DetectDeath();
     }
 
@@ -116,6 +120,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Death() {
         yield return new WaitForSeconds(2.0f);
+        gameOverController.GameOver();
         Destroy(gameObject);
     }
 }

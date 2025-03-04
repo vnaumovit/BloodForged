@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour {
-    private static readonly int takeHint = Animator.StringToHash("takeHint");
+    private static readonly int takeHurt = Animator.StringToHash("takeHurt");
     private static readonly int onAttack = Animator.StringToHash("onAttack");
     private static readonly int isAttacking = Animator.StringToHash("isAttacking");
     [SerializeField] private SwordColliderDown swordColliderDown;
@@ -21,14 +21,14 @@ public class PlayerVisual : MonoBehaviour {
     }
 
     private void Start() {
-        PlayerStats.instance.onTakeHint += OnTakeHint;
+        PlayerStats.instance.onTakeHurt += OnTakeHurt;
         PlayerController.instance.onAttack += OnAttackTrigger;
         PlayerController.instance.onDeath += OnDie;
         playerSound = PlayerSound.instance;
     }
 
     private void OnDestroy() {
-        PlayerStats.instance.onTakeHint -= OnTakeHint;
+        PlayerStats.instance.onTakeHurt -= OnTakeHurt;
         PlayerController.instance.onAttack -= OnAttackTrigger;
         PlayerController.instance.onDeath -= OnDie;
     }
@@ -55,8 +55,8 @@ public class PlayerVisual : MonoBehaviour {
         animator.SetBool(isAttacking, false);
     }
 
-    private void OnTakeHint(object sender, EventArgs e) {
-        animator.SetTrigger(takeHint);
+    private void OnTakeHurt(object sender, EventArgs e) {
+        animator.SetTrigger(takeHurt);
     }
 
     private void HandleAnimationIdleAndRunning() {

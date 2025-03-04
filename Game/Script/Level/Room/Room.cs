@@ -1,15 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using NavMeshSurface = NavMeshPlus.Components.NavMeshSurface;
 
 public class Room : MonoBehaviour {
     private EnvironmentGenerator environmentGenerator;
     private DoorGenerator doorGenerator;
+    private MobGenerator mobGenerator;
+    [SerializeField] private NavMeshSurface navigationSurface;
     public RoomTilemap roomTilemap;
 
     private void Awake() {
         environmentGenerator = GetComponent<EnvironmentGenerator>();
         doorGenerator = GetComponent<DoorGenerator>();
+        mobGenerator = GetComponent<MobGenerator>();
+    }
+
+    public void GenerateMobs() {
+        if (mobGenerator != null) {
+            mobGenerator.GenerateMobs();
+        }
     }
 
     public void GenerateEnvironment() {
@@ -22,6 +32,10 @@ public class Room : MonoBehaviour {
 
     public List<DoorPoint> GetDoorPoints() {
         return doorGenerator.doorPoints;
+    }
+
+    public void CreateWall(DoorPoint doorPoint) {
+        doorGenerator.CreateWall(doorPoint);
     }
 
     public TileBase GetFloorTile() {

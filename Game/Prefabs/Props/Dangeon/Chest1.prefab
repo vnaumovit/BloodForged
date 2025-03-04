@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -6876051011346823332}
   - component: {fileID: -7111501335406279363}
   - component: {fileID: 1183971377635796818}
+  - component: {fileID: 3852433538886709968}
   m_Layer: 0
   m_Name: Chest1
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chanceToCreate: 0.25
+  number: 0
 --- !u!50 &-7111501335406279363
 Rigidbody2D:
   serializedVersion: 5
@@ -176,3 +178,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.26416802, y: 0.115664795}
   m_EdgeRadius: 0
+--- !u!114 &3852433538886709968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138802328860915673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.3, y: 0.3, z: 4}
+  m_Center: {x: 0, y: 0.16, z: 0}
+  m_Area: 0
+  m_AffectedAgents: ffffffff

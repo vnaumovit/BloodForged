@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518184352558121369, guid: 642d3b443dbdd2b418adc3d7d5f1802b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 6518184352558121369, guid: 642d3b443dbdd2b418adc3d7d5f1802b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8491088631626054982, guid: 642d3b443dbdd2b418adc3d7d5f1802b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8491088631626054982, guid: 642d3b443dbdd2b418adc3d7d5f1802b, type: 3}
       propertyPath: m_Name
       value: Portal2

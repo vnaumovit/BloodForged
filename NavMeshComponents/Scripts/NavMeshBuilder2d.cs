@@ -288,6 +288,19 @@ namespace NavMeshPlus.Extensions
 
         public static void CollectTileSources(List<NavMeshBuildSource> sources, Tilemap tilemap, int area, NavMeshBuilder2dState builder)
         {
+            if (tilemap == null)
+            {
+                Debug.LogError("Tilemap is null in CollectTileSources.");
+                return;
+            }
+
+            if (builder == null)
+            {
+                Debug.LogError("NavMeshBuilder2dState is null in CollectTileSources.");
+                return;
+            }
+
+            Debug.Log("Collecting sources for tilemap: " + tilemap.name);
             var bound = tilemap.cellBounds;
 
             var modifierTilemap = tilemap.GetComponent<NavMeshModifierTilemap>();
@@ -299,7 +312,16 @@ namespace NavMeshPlus.Extensions
 
             var vec3int = new Vector3Int(0, 0, 0);
 
+            if (!tilemap.layoutGrid)
+            {
+                Debug.LogError("Tilemap layoutGrid is null.");
+                return;
+            }
+
             var size = new Vector3(tilemap.layoutGrid.cellSize.x, tilemap.layoutGrid.cellSize.y, 0);
+
+            Debug.Log("Tilemap cell size: " + size);
+
             Mesh sharedMesh = null;
             Quaternion rot = default;
 

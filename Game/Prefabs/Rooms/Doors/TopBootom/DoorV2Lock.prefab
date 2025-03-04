@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 270581566985665907, guid: eaacf332d283c9d4eb6207879b17fc09, type: 3}
+      propertyPath: m_Size.y
+      value: 0.15816417
+      objectReference: {fileID: 0}
+    - target: {fileID: 270581566985665907, guid: eaacf332d283c9d4eb6207879b17fc09, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.36445194
+      objectReference: {fileID: 0}
     - target: {fileID: 2105172832792713212, guid: eaacf332d283c9d4eb6207879b17fc09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -54,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 1521761387, guid: 6dbace7750cabe948976d62903952297, type: 3}
     - target: {fileID: 8476258805347469572, guid: eaacf332d283c9d4eb6207879b17fc09, type: 3}
       propertyPath: m_Name
-      value: DoorUpDown2 Variant
+      value: DoorV2Lock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

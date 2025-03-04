@@ -3,30 +3,47 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnvironmentGenerator : MonoBehaviour {
-    [SerializeField] private Transform[] positions;
-    [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private Transform[] propPositions;
+    [SerializeField] private Transform[] torchPositions;
+    [SerializeField] private GameObject[] propPrefabs;
+    [SerializeField] private GameObject torchPrefab;
 
-    private const float chanceToGenerate = 0.5f;
+    private const float CHANCE_TO_GENERATE = 0.5f;
 
     public void GenerateEnvironment() {
+        if (propPrefabs != null) {
+            GenerateProps();
+        }
+
+        if (torchPrefab != null) {
+            GenerateTorches();
+        }
+    }
+
+    private void GenerateProps() {
         GameObject lastPrefab = null;
-        foreach (var position in positions) {
-            if (Random.value <= chanceToGenerate) {
-                List<GameObject> possiblePrefabs = new List<GameObject>(prefabs);
+        foreach (var position in propPositions) {
+            if (CHANCE_TO_GENERATE < Random.value) {
+                List<GameObject> possiblePrefabs = new List<GameObject>(propPrefabs);
                 if (!lastPrefab) {
                     possiblePrefabs.Remove(lastPrefab);
                 }
 
                 var selectedPrefab = possiblePrefabs[Random.Range(0, possiblePrefabs.Count)];
                 var customProperties = selectedPrefab.GetComponent<CustomProperties>();
-                if (Random.value <= customProperties.GetChanceToCreate()) {
+                if (customProperties == null || (customProperties.GetChanceToCreate() < Random.value)) {
                     Instantiate(selectedPrefab, position.position, Quaternion.identity, position);
                     lastPrefab = selectedPrefab;
                 }
-                // if (Random.value > prefab.GetComponent<CustomProperties>().GetChanceToCreate()) {
-                // Instantiate(prefab, t.transform.position,
-                // Quaternion.identity);
-                // }
+            }
+        }
+    }
+
+    private void GenerateTorches() {
+        foreach (var position in torchPositions) {
+            var customProperties = torchPrefab.GetComponent<CustomProperties>();
+            if (customProperties.GetChanceToCreate() < Random.value) {
+                Instantiate(torchPrefab, position.position, Quaternion.identity, position);
             }
         }
     }

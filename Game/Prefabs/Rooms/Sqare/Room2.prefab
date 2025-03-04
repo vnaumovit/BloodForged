@@ -1847,37 +1847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea85753022f4b2c813a6ef09df01c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
-  - {fileID: 988165244624542300}
-  - {fileID: 100255953841204899}
-  - {fileID: 8314859276344619}
-  - {fileID: 4277719001237030074}
-  - {fileID: 1050585362515832854}
-  - {fileID: 7294997763931371873}
-  - {fileID: 6600340530008791341}
-  - {fileID: 7620003454223380637}
-  - {fileID: 7022943914998785520}
-  - {fileID: 3476966565653721550}
-  - {fileID: 3418289118184243644}
-  - {fileID: 8913544306430799409}
-  - {fileID: 1469855867435836613}
-  - {fileID: 4552759593526569346}
-  - {fileID: 970167858938359806}
-  - {fileID: 7490919816171941267}
-  - {fileID: 4401236132244341224}
-  - {fileID: 5837114209335916531}
-  - {fileID: 4410160292482377348}
-  - {fileID: 5197371677815822444}
-  - {fileID: 9197263883581520749}
-  prefabs:
-  - {fileID: 163789738245595738, guid: f8f4dd1258007e24b927f0b61fb1d2bc, type: 3}
-  - {fileID: 5138802328860915673, guid: 37973997599eb474482b352f7efb23da, type: 3}
-  - {fileID: 5044536201706470027, guid: 63ab6fa999c191847be7561782571f03, type: 3}
-  - {fileID: 5367980935204676166, guid: 6b50811808b8266429d45753159c8224, type: 3}
-  - {fileID: 2445648936788035534, guid: 51c3655743d2e964f9bf014e5a7bf077, type: 3}
-  - {fileID: 7690336047418640599, guid: 51c575f1dbd499a409cca237dcdf886e, type: 3}
-  - {fileID: 8740572204094541196, guid: 27ec78cff5fd4dc44ba1c3c99e350319, type: 3}
-  - {fileID: 6959900030374177520, guid: 9c10ca0c7cae2aa47a5e1be59db56860, type: 3}
+  propPositions: []
+  torchPositions: []
+  propPrefabs: []
+  torchPrefab: {fileID: 0}
 --- !u!1 &8208908229821791042
 GameObject:
   m_ObjectHideFlags: 0

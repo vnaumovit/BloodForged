@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NavMeshPlus.Components;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -7,8 +8,8 @@ using Random = UnityEngine.Random;
 public class LevelGenerator : MonoBehaviour {
     [SerializeField] private List<GameObject> rooms;
     [SerializeField] public GameObject corridorPrefab;
-    [SerializeField] private GameObject player;
     [SerializeField] private GameObject portal;
+    [SerializeField] private NavMeshSurface surface;
     private readonly Dictionary<Vector2, Vector2> occupiedPositions = new();
     private readonly List<Room> generatedRooms = new();
 
@@ -24,7 +25,6 @@ public class LevelGenerator : MonoBehaviour {
     private void GenerateDungeon() {
         var roomPosition = Vector2.zero;
         var startRoom = GenerateRoom(roomPosition, "Room1");
-        Instantiate(player, new Vector3(4.5f, 1f, 0), Quaternion.identity);
         Instantiate(portal, new Vector3(4.5f, 1.5f, 0), Quaternion.identity, startRoom.transform);
         var roomComponent = startRoom.GetComponent<Room>();
         var roomSize = roomComponent.GetRoomSize();
@@ -36,16 +36,16 @@ public class LevelGenerator : MonoBehaviour {
             for (int i = 0; i < doorPoints.Count; i++) {
                 if (doorPoints[i].hasDoor && !doorPoints[i].isOccupied) {
                     var newRoom = TryGenerateRoom(roomPosition, roomSize, doorPoints[i]);
-                    if (newRoom != null) {
+                    if (newRoom == null) {
+                        CreateWall(doorPoints, i, roomComponent);
+                    }
+                    else {
                         newRoom.GenerateEnvironment();
+                        newRoom.GenerateMobs();
                         occupiedPositions.Add(newRoom.transform.position, roomSize);
                         doorPoints[i].isOccupied = true;
                         generatedRooms.Add(newRoom);
                         countRooms++;
-                    }
-                    else {
-                        doorPoints[i].GetComponentInChildren<Door>().isLocked = true;
-                        doorPoints[i].isOccupied = true;
                     }
                 }
 
@@ -59,9 +59,28 @@ public class LevelGenerator : MonoBehaviour {
                     }
                 }
             }
-
             dungeonSize--;
         }
+        BakeNavigation();
+    }
+
+    void BakeNavigation() {
+        // Ensure the NavigationSurface is set
+        if (surface != null) {
+            // Hypothetical method to bake navigation data
+            Debug.Log("Start bake Mesh");
+            surface.BuildNavMesh();
+        }
+        else {
+            Debug.Log("NavigationSurface is not assigned.");
+        }
+    }
+
+    private static void CreateWall(List<DoorPoint> doorPoints, int i, Room roomComponent) {
+        var oldDoor = doorPoints[i].GetComponentInChildren<Door>();
+        Destroy(oldDoor.gameObject);
+        roomComponent.CreateWall(doorPoints[i]);
+        doorPoints[i].isOccupied = true;
     }
 
     private Room TryGenerateRoom(Vector2 roomPosition, Vector2 roomSize, DoorPoint doorPoint) {
@@ -73,7 +92,6 @@ public class LevelGenerator : MonoBehaviour {
             Vector2 newRoomSize = newRoomComponent.GetRoomSize();
             var doorPoints = newRoomComponent.GetDoorPoints();
 
-            // Проверяем, есть ли подходящая противоположная дверь
             DoorPoint oppositeDoor = null;
             for (int i = 0; i < doorPoints.Count; i++) {
                 if (HasOppositeDoor(doorPoints[i], doorPoint.type)) {
@@ -88,23 +106,21 @@ public class LevelGenerator : MonoBehaviour {
                 continue;
             }
 
-            // Вычисляем новую позицию комнаты
             var randomDistance = Random.Range(minRoomOffset, maxRoomOffset);
             var newRoomPosition = GetRoomPosition(roomPosition, roomSize, newRoomSize, oppositeDoor, randomDistance);
 
-            // Проверка на перекрытие
             if (IsPositionOccupied(newRoomPosition, newRoomSize)) {
                 Destroy(newRoom);
                 return null;
             }
             
-            GenerateCorridor(newRoomComponent, doorPoint, randomDistance, newRoomComponent.GetFloorTile());
+            GenerateCorridor(doorPoint, randomDistance, newRoomComponent.GetFloorTile());
 
             newRoom.transform.position = newRoomPosition;
             return newRoomComponent;
         }
 
-        return null; // Не удалось создать комнату после всех попыток
+        return null;
     }
 
     private bool IsPositionOccupied(Vector2 newPosition, Vector2 newRoomSize) {
@@ -168,7 +184,7 @@ public class LevelGenerator : MonoBehaviour {
         return currentPos + offset;
     }
 
-    private void GenerateCorridor(Room room, DoorPoint doorPoint, int offset, TileBase floorTile) {
+    private void GenerateCorridor(DoorPoint doorPoint, int offset, TileBase floorTile) {
         var startPosition = Vector2Int.zero;
         Vector2Int endPosition = default;
         if (doorPoint.type == DoorGenerator.Type.Top) {

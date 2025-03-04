@@ -50,7 +50,7 @@ public abstract class EnemyAI : MonoBehaviour {
 
     protected virtual void Start() {
         entity = GetComponent<CommonEntity>();
-        entity.onTakeHint += OnTakeHint;
+        entity.onTakeHurt += OnTakeHurt;
     }
 
     protected virtual void FixedUpdate() {
@@ -60,17 +60,17 @@ public abstract class EnemyAI : MonoBehaviour {
         FacingDirectionHandler();
     }
 
-    protected virtual void OnTakeHint(object sender, HintEventArgs e) {
+    protected virtual void OnTakeHurt(object sender, HurtEventArgs e) {
         knockBack.GetKnockedBack(e.transformSource);
         if (entity.GetHealth() > 0) {
-            StartCoroutine(OnTakeHint());
+            StartCoroutine(OnTakeHurt());
         }
         else {
             DetectDeath();
         }
     }
 
-    private IEnumerator OnTakeHint() {
+    private IEnumerator OnTakeHurt() {
         currentState = State.Idle;
         yield return new WaitForSeconds(0.5f);
         currentState = State.Chasing;
@@ -164,7 +164,6 @@ public abstract class EnemyAI : MonoBehaviour {
         if (chasingDto.chasingBoostTime >= 0f) {
             agent.speed = entity.speed * chasingDto.boostSpeed;
         }
-
         agent.SetDestination(GetOffsetPosition(PlayerController.instance.transform.position));
     }
 

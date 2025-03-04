@@ -21,7 +21,10 @@ public class CameraController : MonoBehaviour {
 
         transform.position = Vector3.zero;
         player = PlayerController.instance.transform;
-        tilemapRenderer = GameObject.Find("Room1").GetComponent<Room>().roomTilemap.wallRender;
+        var tilemap = GameObject.Find("StartTilemap")?.GetComponent<TilemapRenderer>();
+        tilemapRenderer = tilemap != null
+            ? tilemap
+            : GameObject.Find("Room1").GetComponent<Room>().roomTilemap.wallRender;
     }
 
     private void LateUpdate() {

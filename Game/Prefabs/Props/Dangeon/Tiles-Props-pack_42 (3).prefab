@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4129852080346047995}
   - component: {fileID: 8279629781303720845}
   - component: {fileID: 4473979948245280672}
+  - component: {fileID: 2039712735918664824}
   m_Layer: 0
   m_Name: Tiles-Props-pack_42 (3)
   m_TagString: Untagged
@@ -177,3 +178,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7531574, y: 0.73961174}
   m_EdgeRadius: 0
+--- !u!114 &2039712735918664824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690336047418640599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.91, y: 0.8, z: 4}
+  m_Center: {x: 0, y: 0.49, z: 0}
+  m_Area: 0
+  m_AffectedAgents: ffffffff

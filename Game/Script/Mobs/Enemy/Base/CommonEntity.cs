@@ -9,7 +9,7 @@ public class CommonEntity : MonoBehaviour {
     public int speed;
     private const float RECOVERY_TIME = 1f;
 
-    public EventHandler<HintEventArgs> onTakeHint;
+    public EventHandler<HurtEventArgs> onTakeHurt;
 
     protected virtual void Awake() {
         dto = GetComponent<BaseDto>();
@@ -20,7 +20,7 @@ public class CommonEntity : MonoBehaviour {
         if (!canTakeDamage || GetHealth() <= 0)
             return;
         dto.health -= damage;
-        onTakeHint.Invoke(this, HintEventArgs.Of(enemyTransform));
+        onTakeHurt.Invoke(this, HurtEventArgs.Of(enemyTransform));
         StartCoroutine(DamageRecoveryRoutine());
     }
 
